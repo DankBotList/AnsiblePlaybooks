@@ -1,0 +1,41 @@
+---
+- name: 'Pacman cache update and upgrade'
+  pacman:
+    update_cache: yes
+    upgrade: yes
+  when: (ansible_os_family == "Archlinux")
+
+- name: 'apt cache update and upgrade'
+  apt:
+    update_cache: yes
+    upgrade: safe
+  when: (ansible_os_family == "Debian")
+
+- name: 'Install packages: ''zsh'''
+  package: name=zsh state=latest
+- name: 'Install package: ''go'''
+  package: name=go state=latest
+- name: 'Install package: ''sshfs'''
+  package: name=sshfs state=latest
+- name: 'Install package: ''git'''
+  package: name=git state=latest
+- name: 'Install package: ''iptables'''
+  package: name=iptables state=latest
+- name: 'Install package: ''cronie'''
+  package: name=cronie state=latest
+  
+# - name: Creating user ''dankbotlist''
+#   user:
+#     name: dankbotlist
+#     shell: /bin/zsh
+#     group: dankbotlist
+# - name: Set authorized key of ''dankbotlist''
+#   authorized_key:
+#     user: dankbotlist
+#     state: present
+#     key: '{{ item }}'
+#   with_fileglob:
+#     - public_keys/*.pub
+
+- name: Setting up iptables..
+  meta: noop

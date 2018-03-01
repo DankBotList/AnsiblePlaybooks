@@ -1,0 +1,7 @@
+---
+fail2ban_services:
+  - name: ssh
+    port: ssh
+    filter: sshd
+    logpath: /var/log/auth.log
+fail2ban_backend: systemd
